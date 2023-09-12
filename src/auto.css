@@ -1,4 +1,10 @@
 
+              .w100 {
+                width: 100px
+              }
+              .h100 {
+                height: 100px
+              }
               .w81 {
                 width: 81px
               }
@@ -31,4 +37,16 @@
               }
               .m20 {
                 margin: 20px
+              }
+              .h150 {
+                height: 150px
+              }
+              .lh30 {
+                line-height: 30px
+              }
+              .bdr10 {
+                border-radius: 10px
+              }
+              .ml20 {
+                margin-left: 20px
               }

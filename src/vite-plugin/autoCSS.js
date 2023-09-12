@@ -5,34 +5,38 @@ import { resolve } from 'path'
 export function autoClassPlugin(cssFile = 'auto.css', unit='px'){
   let autoCSSFile
   let config
+  let autoClassContent = ''
   return {
       //插件名字
       name:'vite-plugin-whClass',
       enforce: "pre",
       configResolved(resolvedConfig) {
         config = resolvedConfig;
-        autoCSSFile = resolve(config.publicDir, cssFile? cssFile : 'auto.css')
+        console.log(config.root)
+        autoCSSFile =config.root + '/src/'+(cssFile? cssFile : 'auto.css')
         if (!fs.existsSync(autoCSSFile)) fs.writeFileSync(autoCSSFile,'')
+        console.log('css created')
       },
-      transformIndexHtml(html) {
-        return {
-          html,
-          // 注入标签
-          tags: [
-            {
-              // 放到 head 末尾，可取值还有`head`|`head-prepend`|`body-prepend`，顾名思义
-              injectTo: 'head',
-              // 标签属性定义
-              attrs: { rel: 'stylesheet', href: '/' + (cssFile? cssFile : 'auto.css') },
-              // 标签名
-              tag: 'link',
-            },
-          ],
-        }
-      },
+      // transformIndexHtml(html) {
+      //   return {
+      //     html,
+      //     // 注入标签
+      //     tags: [
+      //       {
+      //         // 放到 head 末尾，可取值还有`head`|`head-prepend`|`body-prepend`，顾名思义
+      //         injectTo: 'head',
+      //         // 标签属性定义
+      //         attrs: { rel: 'stylesheet', href: '/' + (cssFile? cssFile : 'auto.css') },
+      //         // 标签名
+      //         tag: 'link',
+      //       },
+      //     ],
+      //   }
+      // },
       transform(code,id){
         // let classNow = fs.readFileSync(cssFile,'utf-8')
         // const classStr = classNow.split(' ')
+        autoClassContent = fs.readFileSync(autoCSSFile)
         const cTypes = {
           w: {key: 'width', unit},
           h: {key: 'height', unit},
@@ -75,7 +79,7 @@ export function autoClassPlugin(cssFile = 'auto.css', unit='px'){
               // console.log(cur)
               const label = cur.replaceAll(/\d+/g, '')
               // console.log(label, cTypes[label])
-              if ( !cTypes[label] ) return pre
+              if ( !cTypes[label] || autoClassContent.includes(cur) ) return pre
               let c = `.${cur} {
                 ${cTypes[label].key}: ${cur.replaceAll(/\D+/g, '')}${cTypes[label].unit}
               }`
@@ -83,7 +87,13 @@ export function autoClassPlugin(cssFile = 'auto.css', unit='px'){
               ${c}`
             }, '')
             // code = code.replace('</style>', wStr + '' + hStr + '  </style>')
-            fs.writeFileSync(autoCSSFile, wStr)
+            autoClassContent += wStr
+            fs.writeFileSync(autoCSSFile, autoClassContent)
+        }
+        else if (id.substring(id.length - 7) == 'main.ts') {
+          console.log(id)
+          code = `import './${cssFile? cssFile : 'auto.css'}'
+          ${code}`
         }
         return code;
       }
