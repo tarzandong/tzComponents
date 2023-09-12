@@ -13,22 +13,46 @@
 //   }
 // }
 
-$mps:1,2,3,4,5,8,10,12, 15, 16,20,30,40,50,60, 80,100, 130;//中等尺寸，用于设定margin,padding等
-$bds:1,2,3,4,5;//小尺寸，用于设定border等
-$fs:9,10,12,14,15,16,18,20,24,28,30,32,36,48,50,60,80,150;
+// $mps:1,2,3,4,5,8,10,12, 15, 16,20,30,40,50,60, 80,100, 130;//中等尺寸，用于设定margin,padding等
+// $classMd:(bdr:border-radius,bdrtl:border-top-left-radius,bdrtr:border-top-right-radius,bdrbl:border-bottom-left-radius,bdrbr:border-bottom-right-radius,p:padding,pl:padding-left,pr:padding-right,pt:padding-top,pb:padding-bottom,m:margin,ml:margin-left,mr:margin-right,mt:margin-top,mb:margin-bottom,zi:z-index,gp:gap);
+// @each $i in $mps {
+//   @each $key,$val in $classMd{
+//     .#{$key}#{$i}{
+//      #{$val}:#{$i}#{$unit}
+//     }
+//   }
+// }
+
+// $fs:9,10,12,14,15,16,18,20,24,28,30,32,36,48,50,60,80,150;
+// $fsClass:(fs:font-size);
+//font-sizes
+// @each $i in $fs {
+//   @each $key,$val in $fsClass{
+//     .#{$key}#{$i}{
+//       #{$val}:#{$i}#{$unit};
+//     }
+//   }
+// }
+
 $unit:px;//单位，可设定自己习惯使用的单位，如em
 
 $per:0,5,10,20,30,40,50,60,70,80,90,100;//百分比，记得在写mixin时除以100
+// $perClass:(op:opacity);//透明度
+// @each $i in $per {
+  
+//   @each $key,$val in $perClass{
+//     .#{$key}#{$i}{
+//       #{$val}:percentage($i*0.01);
+//     }
+//   }
+// }
 $degs:90,180,270;
-
-$perClass:(op:opacity,wp:width,hp:height);
 
 $justifys:(C:center,SA:space-around,SE:space-evenly,SB:space-between,S:flex-start,E:flex-end);//flex布局中的对齐方式
 
-$classMd:(bdr:border-radius,bdrtl:border-top-left-radius,bdrtr:border-top-right-radius,bdrbl:border-bottom-left-radius,bdrbr:border-bottom-right-radius,p:padding,pl:padding-left,pr:padding-right,pt:padding-top,pb:padding-bottom,m:margin,ml:margin-left,mr:margin-right,mt:margin-top,mb:margin-bottom,zi:z-index,lh:line-height,gp:gap);
-$classSm:(b:border,bl:border-left,br:border-right,bt:border-top,bb:border-bottom);
-$fsClass:(fs:font-size);
 
+$bds:1,2,3,4,5;//小尺寸，用于设定border等
+$classSm:(b:border,bl:border-left,br:border-right,bt:border-top,bb:border-bottom);
 
 
 
@@ -63,13 +87,6 @@ $aligns: (
 .ma{
   margin: auto;
 }
-@each $i in $mps {
-  @each $key,$val in $classMd{
-    .#{$key}#{$i}{
-     #{$val}:#{$i}#{$unit}
-    }
-  }
-}
 
 .bbox{
   box-sizing: border-box;
@@ -98,31 +115,15 @@ $aligns: (
 }
 
 //z-index
-@each $i in $bds {
-  .z#{$i}{
-    z-index: $i;
-  }
-}
+// @each $i in $bds {
+//   .z#{$i}{
+//     z-index: $i;
+//   }
+// }
 
 
-//透明度
-@each $i in $per {
-  
-  @each $key,$val in $perClass{
-    .#{$key}#{$i}{
-      #{$val}:percentage($i*0.01);
-    }
-  }
-}
 
-//font-sizes
-@each $i in $fs {
-  @each $key,$val in $fsClass{
-    .#{$key}#{$i}{
-      #{$val}:#{$i}#{$unit};
-    }
-  }
-}
+
 
 //font-weight
 .fwb{
@@ -169,17 +170,17 @@ $aligns: (
 }
 
 //flex值
-@each $i in $bds{ //借用一下小尺寸$bds
-  .fl#{$i}{
-    flex:$i;
-  }
-	.z#{$i}{
-		z-index:$i
-	}
-  .fsrk#{$i}{
-    flex-shrink: $i;
-  }
-}
+// @each $i in $bds{ //借用一下小尺寸$bds
+//   .fl#{$i}{
+//     flex:$i;
+//   }
+// 	.z#{$i}{
+// 		z-index:$i
+// 	}
+//   .fsrk#{$i}{
+//     flex-shrink: $i;
+//   }
+// }
 
 
 //scale
@@ -267,19 +268,19 @@ $aligns: (
   overflow: hidden;
 }
 
-.cbutton {
-  height: 40px;
-  border-radius: 8px;
-  background-color: #ffca64;
-  color:#1b1b1c;
-  font-size: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
+// .cbutton {
+//   height: 40px;
+//   border-radius: 8px;
+//   background-color: #ffca64;
+//   color:#1b1b1c;
+//   font-size: 16px;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   cursor: pointer;
+// }
 
-.cbutton:active {
-  opacity: 0.5;
-}
+// .cbutton:active {
+//   opacity: 0.5;
+// }
