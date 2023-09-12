@@ -2,7 +2,17 @@
 
 @import './variables.scss';
 
-$whs:1, 10, 16, 20, 30, 45, 55, 60, 80, 120, 130, 150, 180, 200, 300, 350, 400, 460, 500;//一些较大的尺寸，用于设定width,height等
+//由于添加了whClass vite插件，这部分会产生大量冗余class的代码就暂时不用了
+// $whs:1, 10, 16, 20, 30, 45, 55, 60, 80, 120, 130, 150, 180, 200, 300, 350, 400, 460, 500;//一些较大的尺寸，用于设定width,height等
+// $classBg:(w:width,h:height,lh:line-height, maxh:max-height, maxw: max-width,);
+// @each $i in $whs {
+//   @each $key,$val in $classBg{
+//     .#{$key}#{$i}{
+//      #{$val}:#{$i}#{$unit};
+//     }
+//   }
+// }
+
 $mps:1,2,3,4,5,8,10,12, 15, 16,20,30,40,50,60, 80,100, 130;//中等尺寸，用于设定margin,padding等
 $bds:1,2,3,4,5;//小尺寸，用于设定border等
 $fs:9,10,12,14,15,16,18,20,24,28,30,32,36,48,50,60,80,150;
@@ -15,7 +25,6 @@ $perClass:(op:opacity,wp:width,hp:height);
 
 $justifys:(C:center,SA:space-around,SE:space-evenly,SB:space-between,S:flex-start,E:flex-end);//flex布局中的对齐方式
 
-$classBg:(w:width,h:height,lh:line-height, maxh:max-height, maxw: max-width,);
 $classMd:(bdr:border-radius,bdrtl:border-top-left-radius,bdrtr:border-top-right-radius,bdrbl:border-bottom-left-radius,bdrbr:border-bottom-right-radius,p:padding,pl:padding-left,pr:padding-right,pt:padding-top,pb:padding-bottom,m:margin,ml:margin-left,mr:margin-right,mt:margin-top,mb:margin-bottom,zi:z-index,lh:line-height,gp:gap);
 $classSm:(b:border,bl:border-left,br:border-right,bt:border-top,bb:border-bottom);
 $fsClass:(fs:font-size);
@@ -45,13 +54,6 @@ $aligns: (
 }
 .hfull{
   height: 100%;
-}
-@each $i in $whs {
-  @each $key,$val in $classBg{
-    .#{$key}#{$i}{
-     #{$val}:#{$i}#{$unit};
-    }
-  }
 }
 
 //paddings margins
