@@ -5,7 +5,7 @@ import { createPinia } from 'pinia'
 import router from './router'
 import './assets/scss/all.scss'
 
-console.log(import.meta.env)
+console.log(import.meta.hot)
 
 
 const app = createApp(App)

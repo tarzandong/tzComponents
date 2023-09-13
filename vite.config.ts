@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import {autoClassPlugin} from './src/vite-plugin/autoCSS.js'
+import {autoClassPlugin} from './src/vite-plugin/index.js'
 import { resolve } from 'path'
 
 // https://vitejs.dev/config/
