@@ -5,7 +5,7 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [autoClassPlugin(), vue()],
+  plugins: [vue(),autoClassPlugin()],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),

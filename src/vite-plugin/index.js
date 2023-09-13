@@ -44,14 +44,15 @@ export function autoClassPlugin(cssFile = 'auto.css', unit='px'){
     enforce: "pre",
     configResolved(resolvedConfig) {
       config = resolvedConfig;
+      console.log(config.build)
       autoCSSFile = config.root + '/src/' + (cssFile? cssFile : 'auto.css')
-      if (!fs.existsSync(autoCSSFile)) fs.writeFileSync(autoCSSFile,'')
     },
     
     transform(code,id){
       // console.log(id)
-      autoClassContent = fs.readFileSync(autoCSSFile)
+      
       if (id.substring(id.length-4) == '.vue') {
+        autoClassContent = fs.readFileSync(autoCSSFile)
         const classArr = code.substring(code.indexOf('<template>'), code.indexOf('</template>')).split(/[ '"]/).filter(item=>{
           return /\d+$/.test(item)
         })
@@ -77,7 +78,12 @@ export function autoClassPlugin(cssFile = 'auto.css', unit='px'){
         // code = code.replace('</style>', contentStr + '' + hStr + '  </style>')
       }
       else if (id.substring(id.length - 7) == 'main.ts' || id.substring(id.length - 7) == 'main.js') {
-        console.log(id)
+        console.log('main',id)
+        const tempPath = id.substring(0, id.length -7)
+        autoCSSFile = tempPath + (cssFile? cssFile : 'auto.css')
+        console.log(autoCSSFile)
+        if (!fs.existsSync(autoCSSFile)) fs.writeFileSync(autoCSSFile,'')
+
         code = `import './${cssFile? cssFile : 'auto.css'}'
         ${code}
         if (import.meta.hot) {
