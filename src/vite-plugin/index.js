@@ -5,6 +5,7 @@ export function autoClassPlugin(cssFile = 'auto.css', unit='px'){
   let config
   let autoClassContent = ''
   let autoCSSFile
+  let init = true
   const cTypes = {
     w: {key: 'width', unit},
     h: {key: 'height', unit},
@@ -79,9 +80,27 @@ export function autoClassPlugin(cssFile = 'auto.css', unit='px'){
         console.log(id)
         code = `import './${cssFile? cssFile : 'auto.css'}'
         ${code}
+        if (import.meta.hot) {
+          import.meta.hot.on('refresh', ()=>{
+            console.log('refresh')
+            window.location.reload()
+          })
+        }
         `
       }
       return code;
     },
+    handleHotUpdate(ctx) {
+      if (ctx.file == autoCSSFile && init) {
+        console.log('refresh css')
+        init = false
+        setTimeout(() => {
+          ctx.server.ws.send({
+            type: 'custom',
+            event: 'refresh'
+          })
+        }, 1000);
+      }
+    }
   }
 }
