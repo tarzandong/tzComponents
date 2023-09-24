@@ -1,49 +1,36 @@
-
-          .w100 {
-            width: 100px
-          }
-          .h150 {
-            height: 150px
-          }
-          .h33 {
-            height: 33px
-          }
-          .lh30 {
-            line-height: 30px
-          }
-          .fs16 {
-            font-size: 16px
-          }
-          .bdr10 {
-            border-radius: 10px
-          }
-          .ml20 {
-            margin-left: 20px
-          }
-          .pl20 {
-            padding-left: 20px
-          }
-          .op130 {
-            opacity: 130%
-          }
-          .vw30 {
-            width: 30vw
-          }
-          .h180 {
-            height: 180px
-          }
-          .mt44 {
-            margin-top: 44px
-          }
-          .bdr8 {
-            border-radius: 8px
-          }
-          .pw20 {
-            width: 20%
-          }
-          .h22 {
-            height: 22px
-          }
-          .m20 {
-            margin: 20px
-          }
+.h150 {
+  height: 150px}
+.w105 {
+  width: 105px}
+.h34 {
+  height: 34px}
+.lh30 {
+  line-height: 30px}
+.fs16 {
+  font-size: 16px}
+.bdr10 {
+  border-radius: 10px}
+.ml20 {
+  margin-left: 20px}
+.pl20 {
+  padding-left: 20px}
+.op130 {
+  opacity: 130%}
+.vw30 {
+  width: 30vw}
+.h180 {
+  height: 180px}
+.mt45 {
+  margin-top: 45px}
+.bdr8 {
+  border-radius: 8px}
+.pw20 {
+  width: 20%}
+.h22 {
+  height: 22px}
+.m20 {
+  margin: 20px
+}
+.w100 {
+  width: 100px
+}
