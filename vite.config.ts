@@ -8,7 +8,10 @@ export default defineConfig({
   plugins: [vue(),autoClassPlugin({
     cssFile: 'auto1.css',
     mainjsFile: 'main.ts',
-    refreshInit: true
+    classTypes: {
+      remw: {key: 'width', unit: 'rem'},
+      emw: {key: 'width', unit: 'em'}
+    }
   })],
   resolve: {
     alias: {
