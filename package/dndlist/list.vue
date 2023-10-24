@@ -1,6 +1,6 @@
 <template>
   <div id="p">
-    <div :class="props.wrapClass" class="wrapClass" draggable="true" @dragover="overHandler" @drop="dropHandler" style="gap:0">
+    <div :class="props.wrapClass" class="wrapClass" draggable="true" @dragover="overHandler" @drop="dropHandler" style="gap:0" :style="{'flex-direction': $props.direction ?? 'row' }" >
       <div v-for="(item) in list" :id="props.itemId? (item[props.itemId] as string) : item" :key="props.itemId? (item[props.itemId] as string) : item" 
       draggable="true" class="trp" @dragstart="startHandler" style="margin: 0" >
         <slot :item="item">{{ item }}</slot>
@@ -14,6 +14,7 @@ import { ref, watch, nextTick, onMounted } from 'vue'
 
 const props = defineProps<{
   wrapClass?: string
+  direction: 'row' | 'column'
   itemId: string
   list: any[]
 }>()
@@ -63,8 +64,8 @@ function toFixed() {
     const item = list.value[i-1]
     const tempEl = document.getElementById(props.itemId? (item[props.itemId] as string) : item) as HTMLElement
     positionArr.unshift({x: tempEl.offsetLeft, y: tempEl.offsetTop})
-    tempEl.style.width = tempEl.offsetWidth + 'px'
-    tempEl.style.height = tempEl.offsetHeight + 'px'
+    // tempEl.style.width = tempEl.offsetWidth + 'px'
+    // tempEl.style.height = tempEl.offsetHeight + 'px'
     tempEl.style.left = tempEl.offsetLeft+'px'
     tempEl.style.top = tempEl.offsetTop+'px'
     tempEl.style.position = 'fixed'
@@ -74,8 +75,8 @@ function toFixed() {
 function restoreFix() {
   list.value.forEach((item)=>{
     const tempEl = document.getElementById(props.itemId? (item[props.itemId] as string) : item) as HTMLElement
-    tempEl.style.width = 'auto'
-    tempEl.style.height = 'auto'
+    // tempEl.style.width = 'auto'
+    // tempEl.style.height = 'auto'
     tempEl.style.position = 'static'
   });
   pEle.style.width = pw;
@@ -97,7 +98,7 @@ function overHandler(e:any) {
   for (let i= positionArr.length; i--; i>0) {
     const nextItem = positionArr[i+1]
     const curItem = positionArr[i]
-    if (e.x > curItem.x && e.y > curItem.y && (nextItem? e.x < nextItem.x : true) ) {
+    if (e.x > curItem.x && e.y > curItem.y && (props.direction === 'row' ? (nextItem? e.x < nextItem.x : true) : (nextItem? e.y < nextItem.y : true))) {
       tempP.value = i
       break
     }  
@@ -143,9 +144,8 @@ export default {
  }
  .wrapClass {
   display: flex;
-  flex-direction: row;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
  }
  .itemClass {
   padding: 10px;
