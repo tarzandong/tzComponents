@@ -2,6 +2,12 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
     wrapClass: {
         type: import("vue").PropType<string>;
     };
+    itemClass: {
+        type: import("vue").PropType<string>;
+    };
+    direction: {
+        type: import("vue").PropType<"row" | "column">;
+    };
     itemId: {
         type: import("vue").PropType<string>;
         required: true;
@@ -17,6 +23,12 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     wrapClass: {
         type: import("vue").PropType<string>;
+    };
+    itemClass: {
+        type: import("vue").PropType<string>;
+    };
+    direction: {
+        type: import("vue").PropType<"row" | "column">;
     };
     itemId: {
         type: import("vue").PropType<string>;

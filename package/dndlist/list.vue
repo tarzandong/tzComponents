@@ -1,8 +1,8 @@
 <template>
   <div id="p">
-    <div :class="props.wrapClass" class="wrapClass" draggable="true" @dragover="overHandler" @drop="dropHandler" style="gap:0" :style="{'flex-direction': $props.direction ?? 'row' }" >
+    <div :class="props.wrapClass ?? ''" class="wrapClass" draggable="true" @dragover="overHandler" @drop="dropHandler" :style="{'flex-direction': $props.direction ?? 'row' }" >
       <div v-for="(item) in list" :id="props.itemId? (item[props.itemId] as string) : item" :key="props.itemId? (item[props.itemId] as string) : item" 
-      draggable="true" class="trp" @dragstart="startHandler" style="margin: 0" >
+      draggable="true" class="trp" :class="props.itemClass ?? ''" @dragstart="startHandler" @dragend="restoreFix" >
         <slot :item="item">{{ item }}</slot>
       </div>
     </div>
@@ -14,7 +14,8 @@ import { ref, watch, nextTick, onMounted } from 'vue'
 
 const props = defineProps<{
   wrapClass?: string
-  direction: 'row' | 'column'
+  itemClass?: string
+  direction?: 'row' | 'column'
   itemId: string
   list: any[]
 }>()
@@ -25,9 +26,9 @@ const emit = defineEmits<{
 
 // const eleWidth = ref(0)
 const list = ref([...props.list])
-let srcP = ref(0)
-const srcItem = ref(list.value[0])
-const positionArr: {x: number, y: number}[] = []
+let srcP = ref(0) //被拖放元素初始位
+const srcItem = ref(list.value[0]) //被拖放的元素
+const positionArr: {x: number, y: number}[] = [] //存放列表各元素的定位
 function startHandler(e:any) {
   // eleWidth.value = e.srcElement.offsetWidth
   toFixed()
@@ -42,10 +43,12 @@ function startHandler(e:any) {
   // nextTick(toFixed)
 }
 
-const tempP = ref(0)
-let pEle: HTMLElement
-let pw: string
+const tempP = ref(0) //存放临时目标位
+
+let pEle: HTMLElement //父元素
+let pw: string //父元素原宽高属性保持
 let ph: string
+
 onMounted(() => {
   pEle = document.getElementById('p') as HTMLElement
   pw = pEle.style.width
@@ -56,7 +59,7 @@ onMounted(() => {
     ph = pEle.style.height
   }
 })
-function toFixed() {
+function toFixed() { //拖放过程中为实现移动的动画，将元素定位变成fixed
   pEle.style.height = (pEle.offsetHeight ) + 'px'
   pEle.style.width = (pEle.offsetWidth) + 'px'
   positionArr.splice(0)
@@ -64,19 +67,15 @@ function toFixed() {
     const item = list.value[i-1]
     const tempEl = document.getElementById(props.itemId? (item[props.itemId] as string) : item) as HTMLElement
     positionArr.unshift({x: tempEl.offsetLeft, y: tempEl.offsetTop})
-    // tempEl.style.width = tempEl.offsetWidth + 'px'
-    // tempEl.style.height = tempEl.offsetHeight + 'px'
     tempEl.style.left = tempEl.offsetLeft+'px'
     tempEl.style.top = tempEl.offsetTop+'px'
     tempEl.style.position = 'fixed'
   }
 }
 
-function restoreFix() {
+function restoreFix() { //恢复元素的定位为static
   list.value.forEach((item)=>{
     const tempEl = document.getElementById(props.itemId? (item[props.itemId] as string) : item) as HTMLElement
-    // tempEl.style.width = 'auto'
-    // tempEl.style.height = 'auto'
     tempEl.style.position = 'static'
   });
   pEle.style.width = pw;
@@ -84,7 +83,6 @@ function restoreFix() {
 }
 
 watch(()=>tempP.value, (p)=>{
-  console.log(p, positionArr)
   if (srcP.value == p) return
   restoreFix()
   list.value.splice(srcP.value, 1)
@@ -114,7 +112,6 @@ function dropHandler(e:any) {
 function restore() {
   console.log('restore')
   list.value = [...props.list]
-  console.log(list.value)
   setTimeout(()=>{
     for (let i = list.value.length; i > 0; i--) {
       const item = list.value[i-1]
@@ -148,7 +145,7 @@ export default {
   /* height: 100%; */
  }
  .itemClass {
-  padding: 10px;
+  /* padding: 10px; */
   box-sizing: border-box;
  }
  .wfull {
