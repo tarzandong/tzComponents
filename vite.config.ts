@@ -12,14 +12,14 @@ export default defineConfig({
     dts({
       include: "./package"
     }),
-    autoClassPlugin({
-    cssFile: 'auto1.css',
-    mainjsFile: 'main.ts',
-    classTypes: {
-      remw: {key: 'width', unit: 'rem'},
-      emw: {key: 'width', unit: 'em'}
-      }
-    })
+    // autoClassPlugin({
+    // cssFile: 'auto1.css',
+    // mainjsFile: 'main.ts',
+    // classTypes: {
+    //   remw: {key: 'width', unit: 'rem'},
+    //   emw: {key: 'width', unit: 'em'}
+    //   }
+    // })
   ],
   resolve: {
     alias: {

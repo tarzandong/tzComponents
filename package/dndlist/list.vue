@@ -21,26 +21,26 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (event: 'change', list: any[]):void
+  (event: 'change', list: any[], changeLog: {from: number, to: number}):void
 }>()
 
 // const eleWidth = ref(0)
 const list = ref([...props.list])
 let srcP = ref(0) //被拖放元素初始位
+const changeLog = {from: 0, to: 0}
 const srcItem = ref(list.value[0]) //被拖放的元素
 const positionArr: {x: number, y: number}[] = [] //存放列表各元素的定位
 function startHandler(e:any) {
-  // eleWidth.value = e.srcElement.offsetWidth
   toFixed()
   positionArr.some((item, index)=>{
     if (item.x == e.srcElement.offsetLeft && item.y == e.srcElement.offsetTop) {
       srcP.value = index
       tempP.value = index
       srcItem.value = list.value[index]
+      changeLog.from = index
       return true
     } else return false
   })
-  // nextTick(toFixed)
 }
 
 const tempP = ref(0) //存放临时目标位
@@ -88,6 +88,7 @@ watch(()=>tempP.value, (p)=>{
   list.value.splice(srcP.value, 1)
   list.value.splice(p, 0, srcItem.value)
   srcP.value = p
+  changeLog.to = p
   nextTick(toFixed)
 })
 
@@ -106,7 +107,7 @@ function overHandler(e:any) {
 function dropHandler(e:any) {
   e.preventDefault();
   restoreFix()
-  emit('change', list.value)
+  emit('change', list.value, changeLog)
 }
 
 function restore() {

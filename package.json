@@ -1,7 +1,7 @@
 {
   "name": "dndlist",
   "private": false,
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "description": "drag and drop list",
   "main": "lib/index.umd.js",

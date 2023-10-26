@@ -19,7 +19,10 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
 }, {
     restore: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
-    change: (list: any[]) => void;
+    change: (list: any[], changeLog: {
+        from: number;
+        to: number;
+    }) => void;
 }, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     wrapClass: {
         type: import("vue").PropType<string>;
@@ -39,7 +42,10 @@ declare const _default: __VLS_WithTemplateSlots<import("vue").DefineComponent<{
         required: true;
     };
 }>> & {
-    onChange?: ((list: any[]) => any) | undefined;
+    onChange?: ((list: any[], changeLog: {
+        from: number;
+        to: number;
+    }) => any) | undefined;
 }, {}, {}>, {
     default?(_: {
         item: any;

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // import DNDList from '@components/list.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import {DragWindow} from '../package/dndElement/drag_window'
 
 const listRef = ref<{restore: ()=>void} | null>(null)
 const testList = [
@@ -17,11 +18,14 @@ const testList = [
   {name: 'Sam', age: 47, id:10}
 ]
 
-function change(list: any[]) {
-  console.log(listRef.value);
+function change(list: any[], changeLog: {from: number, to: number}) {
+  console.log(changeLog);
   console.log(list);
   // (listRef.value as {restore: ()=>void}).restore()
 }
+onMounted(()=>{
+  new DragWindow('dragdiv', 'dragdiv')
+})
 </script>
 
 <template>
@@ -36,7 +40,7 @@ function change(list: any[]) {
     <button>confirm</button>
   </div>
   
-  <div class="w100 h150 bcwhite"></div>
+  <div class="w100 h150 bcwhite psf lft20 top800" id="dragdiv"></div>
 </template>
 
 <style>
