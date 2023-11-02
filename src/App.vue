@@ -31,7 +31,7 @@ onMounted(()=>{
 <template>
   <div>header</div>
   <div class="flxR">
-    <DNDList class="w1000" :list="testList" item-id="id" direction="row" wrapClass="wrap" :itemWidth="200" v-slot="{item: item1}" @change="change" ref="listRef">
+    <DNDList class="w1000" :list="testList" item-id="id" direction="row" wrapClass="wrap" v-slot="{item: item1}" @change="change" ref="listRef">
       <div class="bcwarning flxC w100 h80">
         <div class="fs20 fwb">{{ item1.name }}</div>
         <div >{{ item1.age + ' ' +item1.id }}</div>

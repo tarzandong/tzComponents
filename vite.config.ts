@@ -57,7 +57,7 @@ export default defineConfig({
     outDir: "lib", //输出文件名称
     lib: {
       entry: join(__dirname, './package/index.ts'), //指定组件编译入口文件
-      name: 'vueVideoXg',
+      name: 'dndlist',
       fileName: (format) => `index.${format}.js` // 打包后的文件名
     }, //库编译模式配置
     rollupOptions: {

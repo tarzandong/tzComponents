@@ -8,7 +8,7 @@ specifiers:
   sass: ^1.66.1
   typescript: ^5.0.2
   vite: ^4.4.5
-  vite-plugin-autoclass: ^1.1.6
+  vite-plugin-autoclass: ^1.1.7
   vite-plugin-dts: ^3.6.0
   vue: ^3.3.4
   vue-router: ^4.2.4
@@ -19,7 +19,7 @@ dependencies:
   axios: registry.npmmirror.com/axios/1.5.0
   pinia: registry.npmmirror.com/pinia/2.1.6_typescript@5.2.2+vue@3.3.4
   sass: registry.npmmirror.com/sass/1.66.1
-  vite-plugin-autoclass: 1.1.6
+  vite-plugin-autoclass: 1.1.7
   vite-plugin-dts: 3.6.0_wehe7ow7xb5yzxwl5tv26yvawi
   vue: registry.npmmirror.com/vue/3.3.4
   vue-router: registry.npmmirror.com/vue-router/4.2.4_vue@3.3.4
@@ -664,8 +664,8 @@ packages:
     engines: {node: '>= 0.10'}
     dev: false
 
-  /vite-plugin-autoclass/1.1.6:
-    resolution: {integrity: sha512-PB/aezvgTdA35NDre0k3BgH7WKVA2dN8Vud9Du4Kw8evVYT6yxphOhyJ6wU7og0qqgpM3Wc+3dwd5mhdzQvQLA==}
+  /vite-plugin-autoclass/1.1.7:
+    resolution: {integrity: sha512-DU0s1p+dDvnBNxhkfL2JpbHnqcfgbn9CXkcaqzTY7I9ddJcmaWjgFckLghMIlM1FwEs08Vp0sajnH45rMvyvtA==}
     dev: false
 
   /vite-plugin-dts/3.6.0_wehe7ow7xb5yzxwl5tv26yvawi:

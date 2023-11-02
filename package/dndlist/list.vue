@@ -97,7 +97,7 @@ function overHandler(e:any) {
   for (let i= positionArr.length; i--; i>0) {
     const nextItem = positionArr[i+1]
     const curItem = positionArr[i]
-    if (e.x > curItem.x && e.y > curItem.y && (props.direction === 'row' ? (nextItem? e.x < nextItem.x : true) : (nextItem? e.y < nextItem.y : true))) {
+    if (e.x > curItem.x && e.y > curItem.y && (props.direction === 'column' ? (nextItem? e.y < nextItem.y : true) : (nextItem? e.x < nextItem.x : true))) {
       tempP.value = i
       break
     }  

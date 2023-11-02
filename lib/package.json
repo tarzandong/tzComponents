@@ -1,0 +1,20 @@
+{
+  "name": "dndlist",
+  "private": false,
+  "version": "0.1.8",
+  "type": "module",
+  "description": "drag and drop list",
+  "main": "index.umd.js",
+  "module": "index.es.js",
+  "style": "style.css",
+  "types": "index.d.ts",
+  "files": ["*"],
+  "keywords": [
+    "vue3",
+    "dnd",
+    "drag",
+    "drop",
+    "vue-drag"
+  ],
+  "license": "MIT"
+}
