@@ -4,6 +4,7 @@ specifiers:
   '@types/node': ^20.5.9
   '@vitejs/plugin-vue': ^4.2.3
   axios: ^1.5.0
+  dndlist: ^0.2.3
   pinia: ^2.1.6
   sass: ^1.66.1
   typescript: ^5.0.2
@@ -17,6 +18,7 @@ specifiers:
 dependencies:
   '@types/node': registry.npmmirror.com/@types/node/20.5.9
   axios: registry.npmmirror.com/axios/1.5.0
+  dndlist: 0.2.3
   pinia: registry.npmmirror.com/pinia/2.1.6_typescript@5.2.2+vue@3.3.4
   sass: registry.npmmirror.com/sass/1.66.1
   vite-plugin-autoclass: 1.1.7
@@ -457,6 +459,10 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: false
+
+  /dndlist/0.2.3:
+    resolution: {integrity: sha512-M+v8swJbF2K0+qBB7w2uG1jjQYGnlhgIfTCAT06HIVMu0Atyx7FqyTvA4vUM/aoOpckygi6geq+htsvd+i4Ctw==}
     dev: false
 
   /estree-walker/2.0.2:

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // import DNDList from '@components/list.vue'
+// import {DNDList} from '../lib'
 import { ref, onMounted } from 'vue'
 import {DragWindow} from '../package/dndElement/drag_window'
 

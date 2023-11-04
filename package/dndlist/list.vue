@@ -1,6 +1,6 @@
 <template>
   <div id="p">
-    <div :class="props.wrapClass ?? ''" class="wrapClass" draggable="true" @dragover="overHandler" @drop="dropHandler" :style="{'flex-direction': $props.direction ?? 'row' }" >
+    <div :class="props.wrapClass ?? ''" class="wrapClass" draggable="true" @dragover="overHandler" @drop="dropHandler" :style="{'flex-direction': $props.direction ?? 'row', 'display': 'flex' }" >
       <div v-for="(item) in list" :id="props.itemId? (item[props.itemId] as string) : item" :key="props.itemId? (item[props.itemId] as string) : item" 
       draggable="true" class="trp" :class="props.itemClass ?? ''" @dragstart="startHandler" @dragend="restoreFix" >
         <slot :item="item">{{ item }}</slot>

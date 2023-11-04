@@ -5,11 +5,11 @@
 /// main.ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import dndlist from 'dndlist'
+//import dndlist from 'dndlist'
 import 'dndlist/style.css'
 
 const app = createApp(App)
-app.use(dndlist)
+//app.use(dndlist)
 ...
 ```
 
@@ -25,7 +25,7 @@ app.use(dndlist)
 </template>
 
 <script lang='ts' setup>
-import { DNDList } from 'dndlist/dndlist'
+import {DNDList} from 'dndlist'
   const testList = ref([
     {id:...,
     name,

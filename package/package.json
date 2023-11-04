@@ -1,13 +1,13 @@
 {
   "name": "dndlist",
   "private": false,
-  "version": "0.1.6",
+  "version": "0.2.0",
   "type": "module",
   "description": "drag and drop list",
   "main": "index.umd.js",
   "module": "index.es.js",
   "style": "style.css",
-  "types": "index.d.ts",
+  "types": "*.d.ts",
   "files": ["*"],
   "keywords": [
     "vue3",
