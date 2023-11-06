@@ -4,22 +4,23 @@ import {autoClassPlugin} from 'vite-plugin-autoclass'
 import { resolve, join } from 'path'
 import dts from "vite-plugin-dts"
 
+console.log(process.env.NODE_ENV)
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     //生成ts声明文件
-    dts({
+    process.env.NODE_ENV === 'production'? dts({
       include: "./package"
-    }),
+    }) : 
     autoClassPlugin({
-    cssFile: 'auto1.css',
-    mainjsFile: 'main.ts',
-    classTypes: {
-      remw: {key: 'width', unit: 'rem'},
-      emw: {key: 'width', unit: 'em'}
-      }
-    })
+      cssFile: 'auto1.css',
+      mainjsFile: 'main.ts',
+      classTypes: {
+        remw: {key: 'width', unit: 'rem'},
+        emw: {key: 'width', unit: 'em'}
+        }
+      }),
   ],
   resolve: {
     alias: {
@@ -30,18 +31,6 @@ export default defineConfig({
     }
   },
   css: {
-    // postcss: {
-    //   plugins: [
-    //     autoprefixer({
-    //       overrideBrowserslist: ['Android 4.1', 'iOS 7.1', 'Chrome > 31', 'ff > 31', 'ie >= 8'],
-    //     }),
-    //     postCssPxToRem({
-    //       // 自适应，px>rem转换
-    //       rootValue: 180, // 75表示750设计稿，37.5表示375设计稿
-    //       propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
-    //     }),
-    //   ],
-    // },
     preprocessorOptions: {
       // 全局样式引入
       scss: {
@@ -53,6 +42,7 @@ export default defineConfig({
   server: {
     open: true
   },
+  
   build: {
     outDir: "lib", //输出文件名称
     lib: {
