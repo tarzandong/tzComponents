@@ -1,15 +1,16 @@
-# Drag and Drop in list component
 https://github.com/tarzandong/tzComponents.git
+
+# Drag and Drop in list component
 ## How to use
 ```
 /// main.ts
 import { createApp } from 'vue'
 import App from './App.vue'
-//import dndlist from 'dndlist'
+//import dndComponents from 'dndlist' //global import, not recommended
 import 'dndlist/style.css'
 
 const app = createApp(App)
-//app.use(dndlist)
+//app.use(dndComponents)
 ...
 ```
 
@@ -25,7 +26,7 @@ const app = createApp(App)
 </template>
 
 <script lang='ts' setup>
-import {DNDList} from 'dndlist'
+import {DNDList} from 'dndlist' //import by required
   const testList = ref([
     {id:...,
     name,
@@ -58,3 +59,45 @@ import {DNDList} from 'dndlist'
 
 ## Notice
 * Recommand to render the slot item with fixed width & height, or the position maybe change not by your expectation.
+
+# Drag Element component
+## How to use
+```
+/// main.ts
+same as the list component
+```
+
+```
+/// foo.vue
+<template>
+  <drag-element :list="list" :drag-handle="dragHandle" @drag="drag">
+    <div class="item" v-for="(item, index) in list" :key="index">
+      <div class="drag-handle" @click="dragHandle(index)"></div>
+```
+
+```
+/// foo.vue
+<template>
+  <DNDEle handlerId="handler" left="200px" top="500px">
+    <div>
+      <div class="w100 h50 bcwarning" id="handler"></div>
+      <div class="w100 h150 bcwhite" ></div>
+    </div>
+  </DNDEle>
+</template>
+
+<script lang='ts' setup>
+import {DNDEle} from 'dndlist' //import by required
+  
+</script>
+```
+
+## Props and others in DNDList component
+* handlerId: string, The drag-and-drop handler element id.
+* left: string, The init left position of the target, must with unit like 'px'.
+* top: string, The init top position of the target, must with unit like 'px'.
+* notFixed: boolean, the DNDEle's default style.position is fixed, if you want to use static, you need set the prop to true. 
+
+## Notice
+When you drag the DNDEle, the DNDEle positon style will change to and maintain 'fixed'.
+

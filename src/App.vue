@@ -2,7 +2,9 @@
 // import DNDList from '@components/list.vue'
 // import {DNDList} from '../lib'
 import { ref, onMounted } from 'vue'
-import {DragWindow} from '../package/dndElement/drag_window'
+// import {DragWindow} from '../package/dndElement/drag_window'
+// import DNDEle from '../package/dndElement/DNDEle.vue';
+import {DragWindow} from '../lib'
 
 const listRef = ref<{restore: ()=>void} | null>(null)
 const testList = [
@@ -25,7 +27,7 @@ function change(list: any[], changeLog: {from: number, to: number}) {
   // (listRef.value as {restore: ()=>void}).restore()
 }
 onMounted(()=>{
-  new DragWindow('dragdiv', 'dragdiv')
+  new DragWindow('handler', 'dragdiv')
 })
 </script>
 
@@ -40,8 +42,13 @@ onMounted(()=>{
     </DNDList>
     <button>confirm</button>
   </div>
-  
-  <div class="w100 h150 bcwhite psf lft20 top800" id="dragdiv"></div>
+  <!-- <DNDEle handlerId="" not-fixed left="200px" top="500px" class="mt20"> -->
+    <div id="dragdiv">
+      <div class="w100 h50 bcwarning" id="handler"></div>
+      <div class="w100 h150 bcwhite" ></div>
+    </div>
+  <!-- </DNDEle> -->
+  <div>after</div>
 </template>
 
 <style>

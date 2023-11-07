@@ -1,7 +1,9 @@
 import DNDList from "./dndlist"
+import DNDEle from "./dndElement"
+import { DragWindow } from "./dndElement";
 import {App} from "vue";
 // import { GlobalComponents } from "vue";
-let comps = [DNDList]
+let comps = [DNDList, DNDEle]
 const install = (Vue:App) =>{
     comps.map((component:any)=>{
       Vue.component(component.name as string, component);
@@ -9,7 +11,8 @@ const install = (Vue:App) =>{
 }
 declare module 'vue' {
   export interface GlobalComponents {
-    DNDList: typeof DNDList
+    DNDList: typeof DNDList,
+    DNDEle: typeof DNDEle
   }
 }
 let windowObj = window as any
@@ -20,4 +23,4 @@ if (typeof windowObj !== 'undefined' && windowObj.Vue) {
 
 // export type {GlobalComponents}
 export default {install}
-export {DNDList}
+export {DNDList, DNDEle, DragWindow}

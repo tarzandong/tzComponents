@@ -14,15 +14,13 @@ export class DragWindow{
     this.handle = document.getElementById(toolId) as HTMLElement
     const tempParent = this.ent.parentElement
 
-    this.ent.style.transition = 'left 0.2s, top 0.2s'
+    // this.ent.style.transition = 'left 0.2s, top 0.2s'
     this.ent.style.zIndex = '10'
-
-    this.handle.onmousedown = ()=>{
-      this.ent.draggable = true
-    }
     
     this.left = this.ent.offsetLeft
     this.top = this.ent.offsetTop
+    this.ent.style.left = this.left + 'px'
+    this.ent.style.top = this.top + 'px'
     this.dx = 0
     this.dy = 0
     this.newEle = document.createElement('div')
@@ -35,14 +33,22 @@ export class DragWindow{
     this.newEle.draggable = true
     this.newEle.style.opacity = '0'
 
-    this.start = (e) => {
-      this.dx = e.x - this.left
-      this.dy = e.y - this.top
+    this.handle.addEventListener('mousedown', () => {
+      console.log('handle')
+      this.ent.style.position = 'fixed'
       const body = document.getElementsByTagName('body')[0]
       body.appendChild(this.newEle)
       tempParent?.removeChild(this.ent)
       this.newEle.appendChild(this.ent)
       this.newEle.addEventListener('dragover', this.over)
+      this.ent.draggable = true
+      this.ent.addEventListener('dragstart', this.start)
+      this.ent.addEventListener('dragend', this.end)
+    })
+
+    this.start = (e) => {
+      this.dx = e.x - this.left
+      this.dy = e.y - this.top
     }
 
     this.end = (e) => {
@@ -56,6 +62,8 @@ export class DragWindow{
       this.ent.style.top = this.top + 'px'
       console.log(this.ent.style.top)
       this.ent.draggable = false
+      this.ent.removeEventListener('dragstart', this.start)
+      this.ent.removeEventListener('dragend', this.end)
       
       const body = document.getElementsByTagName('body')[0]
       this.newEle.removeEventListener('dragover', this.over)
@@ -73,8 +81,6 @@ export class DragWindow{
       this.ent.style.top = this.top + 'px'
     }
 
-    this.ent.addEventListener('dragstart', this.start)
-    this.ent.addEventListener('dragend', this.end)
   }
 }
 
