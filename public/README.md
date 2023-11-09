@@ -70,15 +70,7 @@ same as the list component
 ```
 /// foo.vue
 <template>
-  <drag-element :list="list" :drag-handle="dragHandle" @drag="drag">
-    <div class="item" v-for="(item, index) in list" :key="index">
-      <div class="drag-handle" @click="dragHandle(index)"></div>
-```
-
-```
-/// foo.vue
-<template>
-  <DNDEle handlerId="handler" left="200px" top="500px">
+  <DNDEle handlerId="handler" left="200px" top="500px" @drag-start="dragStart">
     <div>
       <div class="w100 h50 bcwarning" id="handler"></div>
       <div class="w100 h150 bcwhite" ></div>
@@ -88,7 +80,9 @@ same as the list component
 
 <script lang='ts' setup>
 import {DNDEle} from 'dndlist' //import by required
-  
+function dragStart(position: {x: number, y: number}) {
+  console.log(position)
+}  
 </script>
 ```
 
@@ -97,7 +91,8 @@ import {DNDEle} from 'dndlist' //import by required
 * left: string, The init left position of the target, must with unit like 'px'.
 * top: string, The init top position of the target, must with unit like 'px'.
 * notFixed: boolean, the DNDEle's default style.position is fixed, if you want to use static, you need set the prop to true. 
+* emits: 2 emits as @drag-start and @drag-end, with the position param {x, y}
 
 ## Notice
-When you drag the DNDEle, the DNDEle positon style will change to and maintain 'fixed'.
+Once you draged the DNDEle, notFixed will be ignored, the DNDEle positon style will change to and maintain 'fixed'.
 

@@ -9,5 +9,14 @@ export declare class DragWindow {
     start: (e: any) => void;
     end: (e: any) => void;
     over: (e: any) => void;
-    constructor(toolId: string, targetId: string);
+    constructor(toolId: string, targetId: string, emit?: {
+        (e: 'drag-start', position: {
+            x: number;
+            y: number;
+        }): void;
+        (e: 'drag-end', position: {
+            x: number;
+            y: number;
+        }): void;
+    });
 }

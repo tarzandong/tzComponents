@@ -15,9 +15,16 @@
     top?: string
     notFixed?: boolean
   }>()
+  const emit = defineEmits<{
+    (e:'drag-start', position:{x:number, y:number}):void
+    (e:'drag-end', position:{x:number, y:number}):void
+  }>()
 
+  // function myEmit(e:'drag-start' | 'drag-end', position: {x: number, y: number}) {
+  //   emit(e, position)
+  // })
   onMounted(() => {
-    new DragWindow(props.handlerId? props.handlerId : 'main', 'main')
+    new DragWindow(props.handlerId? props.handlerId : 'main', 'main', emit)
   })
   
 

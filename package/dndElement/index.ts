@@ -1,6 +1,6 @@
-import DNDEleVue from "./DNDEle.vue"
+import DNDEle from "./DNDEle.vue"
 import { DragWindow } from "./drag_window"
 
-export default DNDEleVue
+export default DNDEle
 
 export { DragWindow }

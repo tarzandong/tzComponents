@@ -1,10 +1,10 @@
 <script setup lang="ts">
 // import DNDList from '@components/list.vue'
 // import {DNDList} from '../lib'
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 // import {DragWindow} from '../package/dndElement/drag_window'
 // import DNDEle from '../package/dndElement/DNDEle.vue';
-import {DragWindow} from '../lib'
+// import {DragWindow} from '../lib'
 
 const listRef = ref<{restore: ()=>void} | null>(null)
 const testList = [
@@ -26,9 +26,15 @@ function change(list: any[], changeLog: {from: number, to: number}) {
   console.log(list);
   // (listRef.value as {restore: ()=>void}).restore()
 }
-onMounted(()=>{
-  new DragWindow('handler', 'dragdiv')
-})
+function dragStart(e: any) {
+  console.log(e);
+}
+function dragEnd(e: any) {
+  console.log(e);
+}
+// onMounted(()=>{
+//   new DragWindow('handler', 'dragdiv')
+// })
 </script>
 
 <template>
@@ -42,12 +48,12 @@ onMounted(()=>{
     </DNDList>
     <button>confirm</button>
   </div>
-  <!-- <DNDEle handlerId="" not-fixed left="200px" top="500px" class="mt20"> -->
+  <DNDEle handlerId="" not-fixed left="200px" top="500px" class="mt20" @drag-start="dragStart" @drag-end="dragEnd">
     <div id="dragdiv">
       <div class="w100 h50 bcwarning" id="handler"></div>
       <div class="w100 h150 bcwhite" ></div>
     </div>
-  <!-- </DNDEle> -->
+  </DNDEle>
   <div>after</div>
 </template>
 

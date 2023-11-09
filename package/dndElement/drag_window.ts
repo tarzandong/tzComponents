@@ -9,7 +9,10 @@ export class DragWindow{
   start: (e: any)=>void
   end: (e: any)=>void
   over:  (e: any)=>void
-  constructor(toolId:string, targetId:string) {
+  constructor(toolId:string, targetId:string, emit?: {
+    (e:'drag-start', position:{x:number, y:number}):void
+    (e:'drag-end', position:{x:number, y:number}):void
+  }) {
     this.ent = document.getElementById(targetId) as HTMLElement
     this.handle = document.getElementById(toolId) as HTMLElement
     const tempParent = this.ent.parentElement
@@ -34,7 +37,7 @@ export class DragWindow{
     this.newEle.style.opacity = '0'
 
     this.handle.addEventListener('mousedown', () => {
-      console.log('handle')
+      // console.log('handle')
       this.ent.style.position = 'fixed'
       const body = document.getElementsByTagName('body')[0]
       body.appendChild(this.newEle)
@@ -44,6 +47,7 @@ export class DragWindow{
       this.ent.draggable = true
       this.ent.addEventListener('dragstart', this.start)
       this.ent.addEventListener('dragend', this.end)
+      if (emit) emit('drag-start', {x: this.left, y: this.top})
     })
 
     this.start = (e) => {
@@ -60,7 +64,7 @@ export class DragWindow{
       this.dy = 0
       this.ent.style.left = this.left + 'px'
       this.ent.style.top = this.top + 'px'
-      console.log(this.ent.style.top)
+      // console.log(this.ent.style.top)
       this.ent.draggable = false
       this.ent.removeEventListener('dragstart', this.start)
       this.ent.removeEventListener('dragend', this.end)
@@ -70,6 +74,7 @@ export class DragWindow{
       this.newEle.removeChild(this.ent)
       body.removeChild(this.newEle)
       tempParent?.appendChild(this.ent)
+      if (emit) emit('drag-end', {x: this.left, y: this.top})
     }
 
     this.over = (e) => {

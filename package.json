@@ -9,7 +9,7 @@
   "style": "lib/style.css",
   "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "package/components.d.ts"
   ],
   "keywords": [
     "vue3",
